@@ -1,0 +1,24 @@
+﻿@model Faculty
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Створити факультет";
+}
+
+    <form enctype="multipart/form-data" asp-controller="faculties" asp-action="create" method="post" class="mt-3">
+        <div class="form-group row">
+            <label asp-for="Title" class="col-sm-2 col-form-label">Факультет</label>
+            <div class="col-sm-10">
+                <input asp-for="Title" class="form-control" placeholder="Назва факультету" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+     
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </form>

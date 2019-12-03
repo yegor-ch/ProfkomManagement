@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ProfkomManagement.Models.Member>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.Title = "Список студентів";
+}
+
+<h4 class="m-4 text-center">Студенти групи</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>ПІБ</th>
+            <th>Факультет</th>
+            <th>Група</th>
+            <th>Дії над студентом</th>  
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            foreach (var member in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                        @{ i++; }
+                    </td>
+                    @{
+                        string fullName = member.Surname + " " + member.Name + " " + member.Patronymic;
+                    }
+                    <td>@fullName</td>
+                    @{
+                        string facultyTitle;
+
+                        try
+                        {
+                            facultyTitle = member.Faculty.Title;
+                        }
+                        catch (Exception)
+                        {
+                            facultyTitle = null;
+                        }
+
+                        if (facultyTitle == null)
+                        {
+                            <td><a class='btn btn-success'>Додати факультет</a></td>
+                        }
+                        else
+                        {
+                            <td>@facultyTitle</td>
+                        }
+
+                        string groupTitle;
+
+                        try
+                        {
+                            groupTitle = member.Group.Title;
+                        }
+                        catch (Exception)
+                        {
+                            groupTitle = null;
+                        }
+
+                        if (groupTitle == null)
+                        {
+                            <td><a class='btn btn-success'>Додати групу</a></td>
+                        }
+                        else
+                        {
+                            <td>@groupTitle</td>
+                        }
+                    }
+                    <td>
+                    <a asp-controller="Members" asp-action="EditMember" asp-route-id="@member.Id" class='btn btn-outline-info'>Редагувати</a>
+                    <a asp-controller="Members" asp-action="DeleteMember" asp-route-id="@member.Id" asp-route-redirectUrl="@Context.Request.Path" class='btn btn-outline-danger'>Видалити</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+﻿@model CreateGroupViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Створити групу";
+}
+
+    <form enctype="multipart/form-data" asp-controller="groups" asp-action="create" method="post" class="mt-3">
+        <div class="form-group row">
+            <label asp-for="Title" class="col-sm-2 col-form-label">Група</label>
+            <div class="col-sm-10">
+                <input asp-for="Title" class="form-control" placeholder="Назва групи" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="FacultyId" class="col-sm-2 col-form-label">Факультет</label>
+            <div class="col-sm-10">
+                <select class="custom-select" asp-for="FacultyId">
+                    @foreach(var faculty in Model.Faculties)
+                    {
+                        <option value="@faculty.Id">@faculty.Title</option>
+                    }
+                </select>
+                @*<span asp-validation-for="FacultyId" class="text-danger"></span>*@
+            </div>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Створити групу</button>
+            </div>
+        </div>
+    </form>

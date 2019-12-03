@@ -1,0 +1,99 @@
+﻿@model AddGroupMembersViewModel
+
+@{
+    ViewBag.Title = "Додати студентів до групи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="text-capitalize m-4 text-center">@Model.FacultyTitle</h4>
+@if (Model.MembersWithoutGroup.Any())
+{
+    <h5 class="text-info m-4">Студенти факультету без групи</h5>
+    <table class="table table-bordered" id="tableWithoutMembers">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>ПІБ</th>
+                <th>Факультет</th>
+                <th>Додати в групу</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int j = 1;
+                foreach (var member in Model.MembersWithoutGroup)
+                {
+                    <tr>
+                        <td hidden="true" class="hiddenId">@member.Id</td>
+                        <td>
+                            @j
+                            @{ j++; }
+                        </td>
+                        @{
+                            string fullName = member.Surname + " " + member.Name + " " + member.Patronymic;
+                        }
+                        <td>@fullName</td>
+                        <td>@member.Faculty.Title</td>
+
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input memberCheck" id="memberChecked__@j" />
+                                <label class="custom-control-label" for="memberChecked__@j">Додати до групи</label>
+                            </div>               
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <a href="#" class="btn btn-primary" id="btnAddGroupMembers">Додати обраних студентів</a>
+}
+
+<h5 class="text-info m-4">Студенти групи <span id="groupTitle">@Model.GroupTitle</span></h5>
+<span hidden="true" id="groupId">@Model.GroupId</span>
+
+<table class="table table-bordered table-hover" id="tableWithMembers">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>ПІБ</th>
+            <th>Факультет</th>
+            <th>Група</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.MembersWithGroup.Any())
+        {
+            int i = 1;
+            foreach (var member in Model.MembersWithGroup)
+            {
+                <tr>
+                    <td>
+                        @i
+                        @{ i++; }
+                    </td>
+                    @{
+                        string fullName = member.Surname + " " + member.Name + " " + member.Patronymic;
+                    }
+                    <td>@fullName</td>
+                    <td>@member.Faculty.Title</td>
+                    <td>@member.Group.Title</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+@if (!Model.MembersWithGroup.Any())
+{ 
+    <h5 class="text-danger m-4">Група на даний момент не має студентів. </h5>
+}
+
+<a asp-controller="members" asp-action="create" class="btn btn-primary">Додати нового студента</a>
+<a asp-controller="groups" asp-action="AddMembersList" asp-route-groupId="@Model.GroupId" class="btn btn-primary">Додати файл студентів</a>
+<a asp-controller="groups" asp-action="LoadTemplate" class="btn btn-outline-secondary">Завантажити шаблон</a>
+
+<script src="~/js/addGroupMembers.js"></script>
+

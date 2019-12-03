@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Faculty>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Список факультетів";
+}
+
+<h4 class="m-4 text-center">Список факультетів</h4>
+<table class="table table-bordered table-hover">
+    <caption></caption>
+    <thead class="thead-light">
+        <tr>
+            <th>№</th>
+            <th>Назва факультету</th>
+            <th>Кількість груп</th>
+            <th>Кількість студентів</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var faculty in Model)
+    {
+        <tr>
+            <td>@faculty.Id</td>
+            <td><a class="btn-link" asp-controller="faculties" asp-action="groups" 
+                   asp-route-facultyId="@faculty.Id">@faculty.Title</a></td>
+            <td>@faculty.Groups.Count()</td>
+            <td>@faculty.Members.Count()</td>
+            <td class="text-right">
+                <a class="btn btn-outline-info" asp-controller="groups"
+                        asp-action="create">Додати групу</a>
+                <a class="btn btn-outline-info" asp-controller="faculties" 
+                        asp-action="delete" asp-route-id="@faculty.Id">Додати членів</a>
+                <a class="btn btn-outline-danger" asp-controller="faculties"
+                        asp-action="delete" asp-route-id="@faculty.Id">Видалити</a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191107101142_InitialDb.cs" />
+    <Compile Remove="Migrations\20191107101142_InitialDb.Designer.cs" />
+    <Compile Remove="Migrations\20191107101832_InitialDb.cs" />
+    <Compile Remove="Migrations\20191107101832_InitialDb.Designer.cs" />
+    <Compile Remove="Migrations\20191112113248_AddNubertTicketField.cs" />
+    <Compile Remove="Migrations\20191112113248_AddNubertTicketField.Designer.cs" />
+    <Compile Remove="Migrations\20191123100605_ChangeDataType.cs" />
+    <Compile Remove="Migrations\20191123100605_ChangeDataType.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>

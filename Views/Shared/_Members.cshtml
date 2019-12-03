@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Member>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>ПІБ</th>
+            <th>Факультет</th>
+            <th>Група</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            foreach (var member in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                    @{ i++; }
+                </td>
+                @{
+                    string fullName = member.Surname + " " + member.Name + " " + member.Patronymic;
+                }
+                <td>@fullName</td>
+                @{
+                    string facultyTitle;
+
+                    try
+                    {
+                        facultyTitle = member.Faculty.Title;
+                    }
+                    catch (Exception)
+                    {
+                        facultyTitle = null;
+                    }
+
+                    if (facultyTitle == null)
+                    {
+                        <td><a asp-controller="groups" asp-action="create" class='btn btn-outline-success'>Додати факультет</a></td>
+                    }
+                    else
+                    {
+                        <td>@facultyTitle</td>
+                    }
+
+                    string groupTitle;
+
+                    try
+                    {
+                        groupTitle = member.Group.Title;
+                    }
+                    catch (Exception)
+                    {
+                        groupTitle = null;
+                    }
+
+                    if (groupTitle == null)
+                    {
+                        <td><a asp-controller="groups" asp-action="create" class='btn btn-success'>Додати групу</a></td>
+                    }
+                    else
+                    {
+                        <td>@groupTitle</td>
+                    }
+                }
+            </tr>
+        }
+        }
+    </tbody>
+</table>

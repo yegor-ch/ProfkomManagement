@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfkomManagement", "ProfkomManagement.csproj", "{2BEE98B6-12E1-4EAF-8463-F4FD780F2AC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BEE98B6-12E1-4EAF-8463-F4FD780F2AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEE98B6-12E1-4EAF-8463-F4FD780F2AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEE98B6-12E1-4EAF-8463-F4FD780F2AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEE98B6-12E1-4EAF-8463-F4FD780F2AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4A4DC50-DA8F-42E6-8DF7-04885B35819B}
+	EndGlobalSection
+EndGlobal

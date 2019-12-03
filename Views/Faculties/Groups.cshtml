@@ -1,0 +1,56 @@
+﻿@model FacultiesGroupsViewModel
+
+@{
+    ViewBag.Title = "Список груп";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4 class="text-capitalize m-4 text-center">@Model.FacultyTitle</h4>
+
+@{
+    if (Model.MembersWithoutGroups.Any())
+    {
+        <h5 class="text-info m-4">Студенти факультету без групи</h5>
+        <partial name="~/Views/Shared/_Members.cshtml" model="Model.MembersWithoutGroups" />
+
+    }
+}
+
+<h5 class="text-info m-4">Групи факультету</h5>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>№</th>
+            <th>Назва Групи</th>
+            <th>Кількість студетнів</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var group in Model.Groups)
+    {
+        <tr>
+            <td>@group.Id</td>
+            <td>
+                <a class="btn-link" asp-controller="groups" asp-action="members"
+                   asp-route-groupId="@group.Id">@group.Title</a>
+            </td>
+            @{
+                <td>@group.Members.Count()</td>
+
+            }
+            <td class="text-right">
+                <a class="btn btn-outline-info" asp-controller="groups"
+                   asp-action="AddGroupMembers" asp-route-groupId="@group.Id">
+                    Додати членів
+                </a>
+                <a class="btn btn-outline-danger" asp-controller="groups"
+                   asp-action="DeleteGroup" asp-route-id="@group.Id">
+                    Видалити
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

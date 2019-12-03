@@ -1,0 +1,14 @@
+﻿body {
+}
+
+.nav-search-btn {
+    border: 0;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    margin-left: 60px;
+}
+.nav-search-btn,
+.nav-search-btn:focus {
+    background-color: transparent;
+    color: #fff;
+}
