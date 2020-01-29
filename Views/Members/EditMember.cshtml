@@ -31,7 +31,7 @@
         <div class="form-group row">
             <label asp-for="DateOfEntry" class="col-sm-2 col-form-label">Дата вступу</label>
             <div class="col-sm-10">
-                <input asp-for="DateOfEntry" type="date" class="form-control" placeholder="" value="@Model.DateOfEntry" />
+                <input asp-for="DateOfEntry" type="date" class="form-control" placeholder="" asp-format="{0:yyyy-MM-dd}"/>
                 <span asp-validation-for="DateOfEntry" class="text-danger"></span>
             </div>
         </div>

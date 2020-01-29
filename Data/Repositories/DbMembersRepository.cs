@@ -50,7 +50,7 @@ namespace ProfkomManagement.Data.Repositories
         public Member Update(Member itemChanges)
         {
             var member = _context.Members.Attach(itemChanges);
-            //member.State = EntityState.Modified;
+            member.State = EntityState.Modified;
             _context.SaveChanges();
 
             return null;

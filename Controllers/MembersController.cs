@@ -106,7 +106,7 @@ namespace ProfkomManagement.Controllers
                     Surname = member.Surname,
                     Patronymic = member.Patronymic,
                     Contribution = member.Contribution,
-                    DateOfEntry = member.DateOfEntry.Date,
+                    DateOfEntry = member.DateOfEntry,
                     DateOfExit = member.DateOfExit,
                     FacultyId = member.FacultyId,
                     Faculties = _facultyRepository.GetList(),
@@ -120,6 +120,31 @@ namespace ProfkomManagement.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult EditMember(EditMemberViewModel model)
+        {
+            if(model != null)
+            {
+                var member = new Member
+                {
+                    Id = model.Id,
+                    Surname = model.Surname,
+                    Name = model.Name,
+                    Patronymic = model.Patronymic,
+                    DateOfEntry = model.DateOfEntry,
+                    NumberOfTicket = model.NumberOfTicket,
+                    IsScholarship = model.IsScholarship,
+                    Contribution = model.Contribution,
+                    FacultyId = model.FacultyId,
+                    GroupId = model.GroupId
+                };
+
+                _membersRepository.Update(member);
+            }
+
+            return RedirectToAction("index", "home");
         }
 
     }

@@ -21,7 +21,7 @@ namespace ProfkomManagement.Controllers.Home
         public IActionResult Index(string search = null)
         {
             if (search == null)
-                return View(_membersRepository.GetList().OrderByDescending(f => f.DateOfEntry));
+                return View(_membersRepository.GetList().OrderByDescending(f => f.DateOfEntry)); 
             
             return View(_membersRepository.Search(search));
         }

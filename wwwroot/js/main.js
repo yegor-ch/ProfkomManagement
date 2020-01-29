@@ -3,6 +3,10 @@
     $("#facultylist").on("change", function () {
         LoadGroupList(this.value);
     });
+
+    // When page is loaded, check the checkbox.
+    CheckIsScholarship();
+
     $(".isScholarship").on("change", function () {
         CheckIsScholarship();
     });
