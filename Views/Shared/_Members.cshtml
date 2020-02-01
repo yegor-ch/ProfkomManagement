@@ -37,7 +37,7 @@
 
                     if (facultyTitle == null)
                     {
-                        <td><a asp-controller="groups" asp-action="create" class='btn btn-outline-success'>Додати факультет</a></td>
+                        <td><a asp-controller="Members" asp-action="EditMember" asp-route-id="@member.Id" class='btn btn-outline-success'>Додати факультет</a></td>
                     }
                     else
                     {
@@ -57,7 +57,7 @@
 
                     if (groupTitle == null)
                     {
-                        <td><a asp-controller="groups" asp-action="create" class='btn btn-success'>Додати групу</a></td>
+                        <td><a asp-controller="Members" asp-action="EditMember" asp-route-id="@member.Id" class='btn btn-success'>Додати групу</a></td>
                     }
                     else
                     {
