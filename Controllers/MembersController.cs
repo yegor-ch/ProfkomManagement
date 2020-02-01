@@ -92,6 +92,12 @@ namespace ProfkomManagement.Controllers
             return LocalRedirect(redirectUrl);            
         }
 
+        /// <summary>
+        /// GET method. 
+        /// Allows us to edit the member's personal information.
+        /// </summary>
+        /// <param name="id">Member's ID</param>
+        /// <returns>Pass EditMemberViewModel to View</returns>
         [HttpGet]
         public IActionResult EditMember(int id)
         {
@@ -107,14 +113,16 @@ namespace ProfkomManagement.Controllers
                     Patronymic = member.Patronymic,
                     Contribution = member.Contribution,
                     DateOfEntry = member.DateOfEntry,
-                    DateOfExit = member.DateOfExit,
-                    FacultyId = member.FacultyId,
-                    Faculties = _facultyRepository.GetList(),
-                    GroupId = member.GroupId,
-                    GroupTitle = member.Group.Title,
+                    DateOfExit = member.DateOfExit,                  
                     IsScholarship = member.IsScholarship,
-                    NumberOfTicket = member.NumberOfTicket
+                    NumberOfTicket = member.NumberOfTicket,
+                    Faculties = _facultyRepository.GetList()
                 };
+
+                model.GroupId = member.GroupId ?? 0;
+                model.GroupTitle = model.GroupId == 0 ? "Група не обрана" : member.Group.Title;
+                
+                model.FacultyId = member.FacultyId ?? 0;
 
                 return View(model);
             }
@@ -122,10 +130,17 @@ namespace ProfkomManagement.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// POST method.
+        /// Allows us to post edited member's data in the data base.
+        /// </summary>
+        /// <param name="model">Model from View</param>
+        /// <returns>Redirect to Index page or Group members page.</returns>
         [HttpPost]
         public IActionResult EditMember(EditMemberViewModel model)
         {
-            if(model != null)
+
+            if (model != null)
             {
                 var member = new Member
                 {
@@ -141,10 +156,20 @@ namespace ProfkomManagement.Controllers
                     GroupId = model.GroupId
                 };
 
+                // If GroupID or FacultyId is '0', need to set value of fields to 'null'. 
+                // We need to do this, because we get foregign key update error. 
+                member.GroupId = model.GroupId == 0 ? null : model.GroupId;
+                member.FacultyId = model.FacultyId == 0 ? null : model.FacultyId;
+
                 _membersRepository.Update(member);
             }
 
-            return RedirectToAction("index", "home");
+            // If group isn't selected.
+            if (model.GroupId == 0)
+                return RedirectToAction("index", "home");
+            // If group is selected.
+            else
+                return RedirectToAction("members", "groups", new { groupId = model.GroupId });
         }
 
     }
