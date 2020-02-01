@@ -27,7 +27,7 @@
                 @{
                     string fullName = member.Surname + " " + member.Name + " " + member.Patronymic;
                 }
-                <td>@fullName</td>
+                <td><a asp-controller="Members" asp-action="EditMember" asp-route-id="@member.Id" class="text-dark">@fullName</a></td>
                 @{
                     string facultyTitle;
 
