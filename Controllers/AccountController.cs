@@ -18,6 +18,7 @@ namespace ProfkomManagement.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        
         [HttpGet]
         public IActionResult Register()
         {
@@ -50,6 +51,34 @@ namespace ProfkomManagement.Controllers
                     {
                         ModelState.AddModelError("", error.Description);
                     }
+                }
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Login user.
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "home");
+                }
+                else
+                {
+                     ModelState.AddModelError("", "Помилка входу. Перевірте введені дані.");
                 }
             }
 
