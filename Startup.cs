@@ -32,8 +32,15 @@ namespace ProfkomManagement
                 options => options.UseSqlServer(_config.GetConnectionString("ProfkomDbConnection"))
                 .UseLazyLoadingProxies());
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ProfkomDbContext>();
+            
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                // Setting password rules.
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+
+            }).AddEntityFrameworkStores<ProfkomDbContext>();
+
 
             
             services.AddScoped<IMemberRepository, DbMembersRepository>();
