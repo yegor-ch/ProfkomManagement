@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProfkomManagement.Models;
 
 namespace ProfkomManagement.Data
 {
-    public class ProfkomDbContext : DbContext
+    public class ProfkomDbContext : IdentityDbContext
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -20,6 +21,7 @@ namespace ProfkomManagement.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
             // When faculty or group will dalete, students wil be exist in table.
             modelBuilder.Entity<Group>().HasMany(m => m.Members).WithOne(g => g.Group).OnDelete(DeleteBehavior.SetNull);

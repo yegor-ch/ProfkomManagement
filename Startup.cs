@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,10 @@ namespace ProfkomManagement
                 options => options.UseSqlServer(_config.GetConnectionString("ProfkomDbConnection"))
                 .UseLazyLoadingProxies());
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ProfkomDbContext>();
+
+            
             services.AddScoped<IMemberRepository, DbMembersRepository>();
             services.AddScoped<IFacultyRepository, DbFacultiesRepository>();
             services.AddScoped<IGroupRepository, DbGroupRepository>();
@@ -49,6 +54,9 @@ namespace ProfkomManagement
 
             //app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=home}/{action=index}/{id?}");
