@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProfkomManagement.Data.Interfeces;
 using ProfkomManagement.Models;
 using ProfkomManagement.ViewModels;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProfkomManagement.Controllers
 {
+    [Authorize]
     public class FacultiesController : Controller
     {
         private readonly IFacultyRepository _repository;

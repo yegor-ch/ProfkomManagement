@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using ProfkomManagement.Data.Interfeces;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace ProfkomManagement.Controllers
 {
+    [Authorize]
     public class MembersController : Controller
     {
         private readonly IMemberRepository _membersRepository;

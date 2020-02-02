@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProfkomManagement.Models;
 using ProfkomManagement.Data.Interfeces;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProfkomManagement.Controllers.Home
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IMemberRepository _membersRepository;
