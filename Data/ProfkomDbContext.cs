@@ -20,10 +20,15 @@ namespace ProfkomManagement.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var rel in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                rel.DeleteBehavior = DeleteBehavior.SetNull;
-            }
+
+            // When faculty or group will dalete, students wil be exist in table.
+            modelBuilder.Entity<Group>().HasMany(m => m.Members).WithOne(g => g.Group).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Faculty>().HasMany(m => m.Members).WithOne(f => f.Faculty).OnDelete(DeleteBehavior.SetNull);
+
+            //foreach (var rel in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            //{
+            //    rel.DeleteBehavior = DeleteBehavior.SetNull;
+            //}
         }
 
 
